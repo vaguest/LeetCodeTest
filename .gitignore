@@ -1,1 +1,10 @@
 /.idea/
+/out/production/LeetCodeTest/.idea/.gitignore
+/out/production/LeetCodeTest/.idea/compiler.xml
+/out/production/LeetCodeTest/.idea/LeetCodeTest.iml
+/out/production/LeetCodeTest/.idea/misc.xml
+/out/production/LeetCodeTest/.idea/modules.xml
+/out/production/LeetCodeTest/.idea/runConfigurations.xml
+/out/production/LeetCodeTest/src/Solution.class
+/out/production/LeetCodeTest/src/TestMain.class
+/out/production/LeetCodeTest/.idea/vcs.xml

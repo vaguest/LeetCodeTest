@@ -1,6 +1,8 @@
 package src;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) {
@@ -127,34 +129,32 @@ public class Solution {
 
 
     public static int totalSteps(int[] nums) {
-        int n = nums.length, count = 0, i = 1, j = 1;
-        boolean flag = false;
-        int[] newNums = nums;
-        while (!isNonDecrease(newNums, n)) {
-            i = 1;
-            j = 1;
-            nums = newNums;
-            while (i < n) {
-                if (nums[i - 1] <= nums[i]) {
-                    newNums[j++] = nums[i++];
-                } else {
-                    i++;
-                }
-            }
-            n = j;
-            count++;
+        int ans = 0;
+        var st = new ArrayDeque<int[]>();
+        for (var num : nums) {
+            var maxT = 0;
+            while (!st.isEmpty() && st.peek()[0] <= num)
+                maxT = Math.max(maxT, st.pop()[1]);
+            maxT = st.isEmpty() ? 0 : maxT + 1;
+            ans = Math.max(ans, maxT);
+            st.push(new int[]{num, maxT});
         }
-        return count;
+        return ans;
     }
 
-    public static boolean isNonDecrease(int[] array, int n) {
-        int i = 0;
-        while (i < n - 1) {
-            if (array[i] > array[i + 1]) {
-                return false;
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int L = m + n - 1, p1 = m - 1, p2 = n - 1;
+        while (p1 > -1 || p2 > -1) {
+            if (p1 == -1) {
+                nums1[L--] = nums2[p2--];
+            } else if (p2 == -1) {
+                nums1[L--] = nums1[p1--];
+            } else if (nums1[p1] > nums2[p2]) {
+                nums1[L--] = nums1[p1--];
+            } else {
+                nums1[L--] = nums2[p2--];
             }
-            i++;
         }
-        return true;
+
     }
 }

@@ -2,6 +2,7 @@ package src;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class Solution {
@@ -155,6 +156,19 @@ public class Solution {
                 nums1[L--] = nums2[p2--];
             }
         }
+    }
 
+    public static int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
+        int i = 0, len = nums.length;
+        for (int num:nums) {
+            if (heap.size() < k)
+                heap.add(num);
+            else if (heap.peek() < num) {
+                heap.poll();
+                heap.add(num);
+            }
+        }
+        return heap.poll();
     }
 }

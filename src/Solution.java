@@ -1,9 +1,7 @@
 package src;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
@@ -170,5 +168,69 @@ public class Solution {
             }
         }
         return heap.poll();
+    }
+
+    public static int maxScore(int[] cardPoints, int k) {
+        int sum = Arrays.stream(cardPoints).sum();
+        if(cardPoints.length == k)
+            return sum;
+        int i = 0, windowSize = cardPoints.length - k, windowSum = 0, len = cardPoints.length, res = 0;
+        while (i < windowSize)
+            windowSum += cardPoints[i++];
+        i = windowSize;
+        res = sum - windowSum;
+        while( i < len){
+            windowSum += cardPoints[i] - cardPoints[i - windowSize];
+            res = Math.max(res, sum - windowSum);
+            i++;
+        }
+        return res;
+    }
+
+    public static int minDeletions(String s) {
+        int res = 0;
+        //将字符串转化为字符数组
+        char[] chars = s.toCharArray();
+        //创建一个HashMap名为hm
+        HashMap<Character,Integer> hm = new HashMap();
+
+        //定义一个字符串c，循环遍历遍历chars数组
+        for(char c : chars)
+            hm.put(c,hm.containsKey(c) ? hm.get(c)+1:1);
+
+        for(Character key: hm.keySet()){
+            //hm.keySet()代表所有键的集合,进行格式化输出
+            System.out.println(key + "====" + hm.get(key));
+        }
+
+
+        return res;
+    }
+
+    public static int minMoves2(int[] nums) {
+        double res = 0, mid;
+        Arrays.sort(nums);
+        mid = nums[nums.length/2];
+        for (double i : nums)
+            res += Math.abs(i - mid);
+        return (int)res;
+    }
+
+    public static int maximumUnits(int[][] boxTypes, int truckSize) {
+        int res = 0, i = 0, numberOfBoxesi, numberOfUnitsPerBoxi;
+        Arrays.sort(boxTypes, (o1, o2) -> o2[1] - o1[1]);
+        while (truckSize > 0 && i < boxTypes.length){
+            numberOfBoxesi = boxTypes[i][0];
+            numberOfUnitsPerBoxi  = boxTypes[i][1];
+            if (numberOfBoxesi > truckSize){
+                res += truckSize * numberOfUnitsPerBoxi;
+                truckSize = 0;
+            }else {
+                res += numberOfUnitsPerBoxi * numberOfBoxesi;
+                truckSize -= numberOfBoxesi;
+            }
+            i++;
+        }
+        return res;
     }
 }

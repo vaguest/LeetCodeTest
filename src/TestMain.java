@@ -1,6 +1,7 @@
 package src;
 
 import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 public class TestMain {
@@ -12,7 +13,7 @@ public class TestMain {
 //        Q867();
 //        Q2289();
 //        Q88();
-        Q205();
+        Q1710();
     }
 
 
@@ -88,5 +89,31 @@ public class TestMain {
                 3,2,1,5,6,4
         };
         System.out.println(Solution.findKthLargest(nums,2));
+    }
+    // Slide Window
+    static void Q1423(){
+        int[] nums1 = {
+                1,2,3,4,5,6,1
+        };
+        System.out.printf(String.valueOf(Solution.maxScore(nums1,3)));
+    }
+
+    static void Q1647(){
+        String s = "ceabaacb";
+        Solution.minDeletions(s);
+    }
+
+    static void Q462(){
+        int[] nums = {
+                1,0,0,8,6
+        };
+        System.out.println(Solution.minMoves2(nums));
+    }
+
+    static void Q1710(){
+        int[][] boxTypes = {
+                {5,10}, {2,5},{4,7},{3,9}
+        };
+        System.out.println(Solution.maximumUnits(boxTypes,10));
     }
 }
